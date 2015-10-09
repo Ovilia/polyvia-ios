@@ -512,6 +512,7 @@
 				E193D1451BC78A920025DA17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E193D1461BC78A920025DA17 /* Build configuration list for PBXNativeTarget "polyviaTests" */ = {
 			isa = XCConfigurationList;
@@ -520,6 +521,7 @@
 				E193D1481BC78A920025DA17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
