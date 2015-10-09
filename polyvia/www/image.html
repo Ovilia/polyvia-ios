@@ -1,11 +1,16 @@
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width" />
     <title>Low Poly Image Processor</title>
     <link rel="stylesheet" type="text/css", href="css/main.css" />
   </head>
-  <body>
+  <body onload="init()">
     <canvas id="main-canvas"></canvas>
+
+    <div id="control-panel">
+      <button onclick="uploadImage()">upload</button>
+      <input type="file" id="uploadInput" />
+    </div>
 
     <script type="text/javascript" src="js/delaunay.js"></script>
     <script type="text/javascript" src="js/tracking.js"></script>

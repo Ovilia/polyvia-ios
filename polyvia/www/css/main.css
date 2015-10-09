@@ -4,12 +4,16 @@
     margin: 0;
 }
 
-html {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
 #main-canvas {
     background-color: black;
+}
+
+#control-panel {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#uploadInput {
+    display: none;
 }

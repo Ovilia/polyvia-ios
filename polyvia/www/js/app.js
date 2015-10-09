@@ -4,6 +4,35 @@ var ctx = canvas.getContext('2d');
 
 var renderSize = null;
 
+// parameters used for background rendering when image is not selected
+var background = {
+    animationHandler: null
+};
+
+
+
+// init when page loaded
+function init() {
+    renderRandomBackground();
+}
+
+
+
+// call when click upload button
+function uploadImage() {
+    var input = document.getElementById('uploadInput');
+    input.addEventListener('change', function() {
+        var file = input.files[0];
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            generate(e.target.result, 1000);
+        };
+        reader.readAsDataURL(file);
+    });
+    input.click();
+}
+
 
 
 // generate with new image
@@ -98,12 +127,6 @@ function renderTriangles(vertices, triangles) {
         ctx.lineTo(c[0], c[1]);
         ctx.closePath();
         ctx.fill();
-
-        // draw the vertices
-        // ctx.fillStyle = 'rgb(255, 255, 0)';
-        // ctx.fillRect(a[0], a[1], 1, 1);
-        // ctx.fillRect(b[0], b[1], 1, 1);
-        // ctx.fillRect(c[0], c[1], 1, 1);
     }
 }
 
@@ -117,6 +140,109 @@ function setCanvasSize() {
     } else {
         canvas.width = canvas.style.width = window.innerWidth;
         canvas.height = canvas.style.height = window.innerHeight;
+    }
+}
+
+
+
+// random background
+function renderRandomBackground() {
+    stopBackgroundAnimation();
+
+    background.animationTime = 0;
+
+    // set canvas to full screen
+    renderSize = {
+        w: window.innerWidth,
+        h: window.innerHeight
+    };
+    setCanvasSize();
+
+    // color vibration
+    var jitter = 0.08;
+
+    // add random vertices
+    vertices = [[0, 0], [renderSize.w, 0],
+                [renderSize.w, renderSize.h], [0, renderSize.h]];
+    background.vertices = vertices;
+    for (var i = 0; i < 64; ++i) {
+        vertices.push([
+            Math.floor(renderSize.w * Math.random()),
+            Math.floor(renderSize.h * Math.random())
+        ]);
+    }
+
+    // triangulate
+    var triangles = Delaunay.triangulate(vertices);
+    background.triangles = triangles;
+
+    // animation of color
+    function tick() {
+        var totalFrames = 50;
+        if (background.animationTime < totalFrames) {
+            renderBackground(background.animationTime / totalFrames);
+
+            requestAnimationFrame(tick);
+            ++background.animationTime;
+        }
+    }
+    tick();
+
+    // render different color with given animation time
+    // timeRatio is between [0, 1]. 1 when comes to end of animation
+    function renderBackground(timeRatio) {
+        // render background
+        var c1 = [255, 210, 88];
+        var c2 = [255, 88, 127];
+        var grad = ctx.createLinearGradient(0, 0, 0, renderSize.h);
+        grad.addColorStop(1, 'rgb(' + c1[0] + ',' + c1[1] + ',' + c1[2]);
+        grad.addColorStop(1 - timeRatio, 'rgb(' + c2[0] + ',' + c2[1] + ',' + c2[2]);
+        ctx.rect(0, 0, renderSize.w, renderSize.h);
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        // render triangles
+        for(var i = triangles.length - 1; i > 2; i -= 3) {
+            // positions of three vertices
+            var a = [vertices[triangles[i]][0], 
+                    vertices[triangles[i]][1]];
+            var b = [vertices[triangles[i - 1]][0], 
+                    vertices[triangles[i - 1]][1]];
+            var c = [vertices[triangles[i - 2]][0], 
+                    vertices[triangles[i - 2]][1]];
+
+            // fill with color in center of gravity
+            var y = (Math.max(0, Math.min(1, (a[1] + b[1] + c[1]) / 3
+                    / renderSize.h + Math.random() * jitter * 2 - jitter)))
+                    * timeRatio;
+            // blending two colors
+            var color = [
+                Math.floor(c1[0] * y + c2[0] * (1 - y)),
+                Math.floor(c1[1] * y + c2[1] * (1 - y)),
+                Math.floor(c1[2] * y + c2[2] * (1 - y))
+            ];
+            var rgb = 'rgb(' + color[0] + ', ' + color[1] + ', '
+                    + color[2] + ')';
+            ctx.fillStyle = rgb;
+
+            // draw the triangle
+            ctx.beginPath();
+            ctx.moveTo(a[0], a[1]);
+            ctx.lineTo(b[0], b[1]);
+            ctx.lineTo(c[0], c[1]);
+            ctx.closePath();
+            ctx.fill();
+        }
+    }
+}
+
+
+
+// clear animation if has
+function stopBackgroundAnimation() {
+    if (background.animationHandler) {
+        cancelAnimationFrame(background.animationHandler);
+        background.animationHandler = null;
     }
 }
 
