@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <meta name='viewport' content='width=device-width' />
+    <title>Echo demo of Crosswalk</title>
+  </head>
+  <body onload='onload()'>
+    <h2>Echo Demo of Crosswalk</h2>
+    <p id="content" style="font-size: 20px;" />
+    <script>
+      function onload() {
+        xwalk.example.echo.echo('Hello World!', function(msg) {
+          document.getElementById('content').innerHTML = msg;
+        });
+      }
+    </script>
+  </body>
+</html>

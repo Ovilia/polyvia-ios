@@ -13,6 +13,9 @@
 		E193D1311BC78A920025DA17 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E193D1301BC78A920025DA17 /* Images.xcassets */; };
 		E193D1341BC78A920025DA17 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E193D1321BC78A920025DA17 /* LaunchScreen.xib */; };
 		E193D1401BC78A920025DA17 /* polyviaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E193D13F1BC78A920025DA17 /* polyviaTests.swift */; };
+		E193D1521BC78AE60025DA17 /* XWalkView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E193D14F1BC78AAA0025DA17 /* XWalkView.framework */; };
+		E193D15D1BC78BE40025DA17 /* www in Resources */ = {isa = PBXBuildFile; fileRef = E193D15C1BC78BE40025DA17 /* www */; };
+		E193D15F1BC78CCB0025DA17 /* manifest.plist in Resources */ = {isa = PBXBuildFile; fileRef = E193D15E1BC78CCB0025DA17 /* manifest.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -22,6 +25,34 @@
 			proxyType = 1;
 			remoteGlobalIDString = E193D1231BC78A920025DA17;
 			remoteInfo = polyvia;
+		};
+		E193D14E1BC78AAA0025DA17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E193D1491BC78AA90025DA17 /* XWalkView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EE62683519FA323900EFC3F8;
+			remoteInfo = XWalkView;
+		};
+		E193D1501BC78AAA0025DA17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E193D1491BC78AA90025DA17 /* XWalkView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AB023EA01A8C506600580A2A;
+			remoteInfo = XWalkViewTests;
+		};
+		E193D1581BC78B210025DA17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E193D1531BC78B210025DA17 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1AAE0E81ADA5DE7DAADFA16AA0FF7F78;
+			remoteInfo = GCDWebServer;
+		};
+		E193D15A1BC78B210025DA17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E193D1531BC78B210025DA17 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 193CA550667324EEC19547251A6DB2B1;
+			remoteInfo = Pods;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -36,6 +67,10 @@
 		E193D1391BC78A920025DA17 /* polyviaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = polyviaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E193D13E1BC78A920025DA17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E193D13F1BC78A920025DA17 /* polyviaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = polyviaTests.swift; sourceTree = "<group>"; };
+		E193D1491BC78AA90025DA17 /* XWalkView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XWalkView.xcodeproj; path = "../crosswalk-ios/XWalkView/XWalkView.xcodeproj"; sourceTree = "<group>"; };
+		E193D1531BC78B210025DA17 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = "../crosswalk-ios/XWalkView/Pods/Pods.xcodeproj"; sourceTree = "<group>"; };
+		E193D15C1BC78BE40025DA17 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = polyvia/www; sourceTree = "<group>"; };
+		E193D15E1BC78CCB0025DA17 /* manifest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = manifest.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E193D1521BC78AE60025DA17 /* XWalkView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +95,10 @@
 		E193D11B1BC78A920025DA17 = {
 			isa = PBXGroup;
 			children = (
+				E193D15E1BC78CCB0025DA17 /* manifest.plist */,
+				E193D15C1BC78BE40025DA17 /* www */,
+				E193D1531BC78B210025DA17 /* Pods.xcodeproj */,
+				E193D1491BC78AA90025DA17 /* XWalkView.xcodeproj */,
 				E193D1261BC78A920025DA17 /* polyvia */,
 				E193D13C1BC78A920025DA17 /* polyviaTests */,
 				E193D1251BC78A920025DA17 /* Products */,
@@ -110,6 +150,24 @@
 				E193D13E1BC78A920025DA17 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E193D14A1BC78AA90025DA17 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E193D14F1BC78AAA0025DA17 /* XWalkView.framework */,
+				E193D1511BC78AAA0025DA17 /* XWalkViewTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E193D1541BC78B210025DA17 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E193D1591BC78B210025DA17 /* GCDWebServer.framework */,
+				E193D15B1BC78B210025DA17 /* Pods.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,6 +237,16 @@
 			mainGroup = E193D11B1BC78A920025DA17;
 			productRefGroup = E193D1251BC78A920025DA17 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E193D1541BC78B210025DA17 /* Products */;
+					ProjectRef = E193D1531BC78B210025DA17 /* Pods.xcodeproj */;
+				},
+				{
+					ProductGroup = E193D14A1BC78AA90025DA17 /* Products */;
+					ProjectRef = E193D1491BC78AA90025DA17 /* XWalkView.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				E193D1231BC78A920025DA17 /* polyvia */,
@@ -187,12 +255,45 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		E193D14F1BC78AAA0025DA17 /* XWalkView.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = XWalkView.framework;
+			remoteRef = E193D14E1BC78AAA0025DA17 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E193D1511BC78AAA0025DA17 /* XWalkViewTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = XWalkViewTests.xctest;
+			remoteRef = E193D1501BC78AAA0025DA17 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E193D1591BC78B210025DA17 /* GCDWebServer.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GCDWebServer.framework;
+			remoteRef = E193D1581BC78B210025DA17 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E193D15B1BC78B210025DA17 /* Pods.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods.framework;
+			remoteRef = E193D15A1BC78B210025DA17 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		E193D1221BC78A920025DA17 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E193D15D1BC78BE40025DA17 /* www in Resources */,
 				E193D12F1BC78A920025DA17 /* Main.storyboard in Resources */,
+				E193D15F1BC78CCB0025DA17 /* manifest.plist in Resources */,
 				E193D1341BC78A920025DA17 /* LaunchScreen.xib in Resources */,
 				E193D1311BC78A920025DA17 /* Images.xcassets in Resources */,
 			);
