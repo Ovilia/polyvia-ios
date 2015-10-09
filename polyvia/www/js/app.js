@@ -3,11 +3,17 @@ setCanvasSize();
 var ctx = canvas.getContext('2d');
 
 var renderSize = null;
+var imgSrc = null;
 
 // parameters used for background rendering when image is not selected
 var background = {
     animationHandler: null
 };
+
+function log(txt) {
+    var d = document.getElementById('log');
+    d.innerHTML = d.innerHTML + '<br>' +txt;
+}
 
 
 
@@ -26,6 +32,7 @@ function uploadImage() {
 
         var reader = new FileReader();
         reader.onload = function(e) {
+            imgSrc = e.target.result;
             generate(e.target.result, 1000);
         };
         reader.readAsDataURL(file);
@@ -162,7 +169,7 @@ function renderRandomBackground() {
     var jitter = 0.08;
 
     // add random vertices
-    vertices = [[0, 0], [renderSize.w, 0],
+    var vertices = [[0, 0], [renderSize.w, 0],
                 [renderSize.w, renderSize.h], [0, renderSize.h]];
     background.vertices = vertices;
     for (var i = 0; i < 64; ++i) {
@@ -182,7 +189,7 @@ function renderRandomBackground() {
         if (background.animationTime < totalFrames) {
             renderBackground(background.animationTime / totalFrames);
 
-            requestAnimationFrame(tick);
+            background.animationHandler = setTimeout(tick, 20);
             ++background.animationTime;
         }
     }
@@ -195,8 +202,8 @@ function renderRandomBackground() {
         var c1 = [255, 210, 88];
         var c2 = [255, 88, 127];
         var grad = ctx.createLinearGradient(0, 0, 0, renderSize.h);
-        grad.addColorStop(1, 'rgb(' + c1[0] + ',' + c1[1] + ',' + c1[2]);
-        grad.addColorStop(1 - timeRatio, 'rgb(' + c2[0] + ',' + c2[1] + ',' + c2[2]);
+        grad.addColorStop(1, 'rgb(' + c1[0] + ',' + c1[1] + ',' + c1[2] + ')');
+        grad.addColorStop(1 - timeRatio, 'rgb(' + c2[0] + ',' + c2[1] + ',' + c2[2] + ')');
         ctx.rect(0, 0, renderSize.w, renderSize.h);
         ctx.fillStyle = grad;
         ctx.fill();
@@ -215,6 +222,7 @@ function renderRandomBackground() {
             var y = (Math.max(0, Math.min(1, (a[1] + b[1] + c[1]) / 3
                     / renderSize.h + Math.random() * jitter * 2 - jitter)))
                     * timeRatio;
+
             // blending two colors
             var color = [
                 Math.floor(c1[0] * y + c2[0] * (1 - y)),
@@ -241,7 +249,7 @@ function renderRandomBackground() {
 // clear animation if has
 function stopBackgroundAnimation() {
     if (background.animationHandler) {
-        cancelAnimationFrame(background.animationHandler);
+        clearTimeout(background.animationHandler);
         background.animationHandler = null;
     }
 }

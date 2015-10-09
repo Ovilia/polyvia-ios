@@ -4,16 +4,30 @@
     margin: 0;
 }
 
+html {
+    background-color: red;
+}
+
 #main-canvas {
-    background-color: black;
+    background-color: yellow;
 }
 
 #control-panel {
     position: absolute;
     left: 0;
     top: 0;
+    width: 100%;
 }
 
 #uploadInput {
     display: none;
+}
+
+#upload-img {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    left: 50%;
+    margin-left: -50px;
+    margin-top: 200px;
 }
