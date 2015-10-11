@@ -31,3 +31,8 @@ html {
     margin-left: -50px;
     margin-top: 200px;
 }
+
+#upload-text{
+    text-align:center;
+    margin-top:1em;
+}

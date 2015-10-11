@@ -20,6 +20,7 @@ function log(txt) {
 // init when page loaded
 function init() {
     renderRandomBackground();
+    i18n();
 }
 
 
@@ -286,4 +287,13 @@ function getRenderSize(iw, ih, cw, ch) {
         w: w,
         h: h
     };
+}
+
+// Set text according UA's language preference
+function i18n() {
+    if(window.navigator.language=='zh-cn'){
+        document.getElementById('upload-text').innerText='上传图片';
+    }else{
+        document.getElementById('upload-text').innerText='Upload An Image';
+    }
 }
