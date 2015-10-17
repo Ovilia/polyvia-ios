@@ -36,6 +36,7 @@ function uploadImage() {
             imgSrc = e.target.result;
             generate(e.target.result, 1000, function(){
               $('#control-panel').hide();
+              $('.toolbar').show();
             });
         };
         reader.readAsDataURL(file);
