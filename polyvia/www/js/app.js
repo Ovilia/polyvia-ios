@@ -34,7 +34,9 @@ function uploadImage() {
         var reader = new FileReader();
         reader.onload = function(e) {
             imgSrc = e.target.result;
-            generate(e.target.result, 1000);
+            generate(e.target.result, 1000, function(){
+              $('#control-panel').hide();
+            });
         };
         reader.readAsDataURL(file);
     });
@@ -44,13 +46,13 @@ function uploadImage() {
 
 
 // generate with new image
-function generate(imgSrc, cnt) {
+function generate(imgSrc, cnt, callback) {
     renderSize = null;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     getVertices(imgSrc, cnt, function(vertices) {
         var triangles = Delaunay.triangulate(vertices);
-        renderTriangles(vertices, triangles);
+        renderTriangles(vertices, triangles, callback);
     });
 }
 
@@ -110,7 +112,7 @@ function getVertices(imgSrc, cnt, callback) {
 
 
 // render triangles with colors
-function renderTriangles(vertices, triangles) {
+function renderTriangles(vertices, triangles, callback) {
     for(var i = triangles.length - 1; i > 2; i -= 3) {
         // positions of three vertices
         var a = [vertices[triangles[i]][0], 
@@ -136,6 +138,9 @@ function renderTriangles(vertices, triangles) {
         ctx.closePath();
         ctx.fill();
     }
+
+    if(callback)
+      callback();
 }
 
 
