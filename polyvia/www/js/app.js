@@ -68,6 +68,7 @@ function getVertices(imgSrc, cnt, callback) {
         renderSize = getRenderSize(image.width, image.height,
                 window.innerWidth, window.innerHeight);
         setCanvasSize();
+        verticalCenterCanvas();
 
         // render original image
         ctx.drawImage(image, 0, 0, renderSize.w, renderSize.h);
@@ -157,7 +158,12 @@ function setCanvasSize() {
     }
 }
 
-
+// set margin to center canvas
+function verticalCenterCanvas() {
+   if (renderSize) {
+     $(canvas).css('margin-top', (window.innerHeight-renderSize.h)/2);
+   }
+}
 
 // random background
 function renderRandomBackground() {
