@@ -20,6 +20,7 @@ function log(txt) {
 // init when page loaded
 function init() {
     renderRandomBackground();
+    i18n();
 }
 
 
@@ -33,7 +34,10 @@ function uploadImage() {
         var reader = new FileReader();
         reader.onload = function(e) {
             imgSrc = e.target.result;
-            generate(e.target.result, 1000);
+            generate(e.target.result, 1000, function(){
+              $('#control-panel').hide();
+              $('.toolbar').show();
+            });
         };
         reader.readAsDataURL(file);
     });
@@ -43,13 +47,13 @@ function uploadImage() {
 
 
 // generate with new image
-function generate(imgSrc, cnt) {
+function generate(imgSrc, cnt, callback) {
     renderSize = null;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     getVertices(imgSrc, cnt, function(vertices) {
         var triangles = Delaunay.triangulate(vertices);
-        renderTriangles(vertices, triangles);
+        renderTriangles(vertices, triangles, callback);
     });
 }
 
@@ -64,6 +68,7 @@ function getVertices(imgSrc, cnt, callback) {
         renderSize = getRenderSize(image.width, image.height,
                 window.innerWidth, window.innerHeight);
         setCanvasSize();
+        verticalCenterCanvas();
 
         // render original image
         ctx.drawImage(image, 0, 0, renderSize.w, renderSize.h);
@@ -109,7 +114,7 @@ function getVertices(imgSrc, cnt, callback) {
 
 
 // render triangles with colors
-function renderTriangles(vertices, triangles) {
+function renderTriangles(vertices, triangles, callback) {
     for(var i = triangles.length - 1; i > 2; i -= 3) {
         // positions of three vertices
         var a = [vertices[triangles[i]][0], 
@@ -135,6 +140,9 @@ function renderTriangles(vertices, triangles) {
         ctx.closePath();
         ctx.fill();
     }
+
+    if(callback)
+      callback();
 }
 
 
@@ -150,7 +158,12 @@ function setCanvasSize() {
     }
 }
 
-
+// set margin to center canvas
+function verticalCenterCanvas() {
+   if (renderSize) {
+     $(canvas).css('margin-top', (window.innerHeight-renderSize.h)/2);
+   }
+}
 
 // random background
 function renderRandomBackground() {
@@ -286,4 +299,13 @@ function getRenderSize(iw, ih, cw, ch) {
         w: w,
         h: h
     };
+}
+
+// Set text according UA's language preference
+function i18n() {
+    if(window.navigator.language=='zh-cn'){
+        document.getElementById('upload-text').innerText='上传图片';
+    }else{
+        document.getElementById('upload-text').innerText='Upload An Image';
+    }
 }
